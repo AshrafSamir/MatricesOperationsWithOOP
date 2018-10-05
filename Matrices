@@ -1,0 +1,97 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+// Course:  CS213 - Programming II  - 2018
+// Title:   Assignment I - Book Problem
+// Program: CS213-2018-A1-T1-P2
+// solved by: Ashraf Samir Ali 20170053
+// Date:    10 August 2018
+
+using namespace std;
+
+
+// Cout function for matrix
+void print (int mat[4][4]){
+
+    for(int i=0;i<4;i++){
+        for(int j=0;j<4;j++){
+            cout << mat[i][j] <<"  ";
+        }
+        cout << endl;
+    }
+}
+
+// function to shuffle matrix
+void shuffle (int arr[16]){
+    int ranindex=0,tmp=0;
+    for(int i=0;i<16;i++){
+        ranindex=rand()%8;
+        tmp=arr[i];
+        arr[i]=arr[ranindex];
+        arr[ranindex]=tmp;
+        }
+}
+
+
+
+
+int main()
+{
+    int x1,y1,x2,y2,tmp,counter=0;
+    bool isR=true;
+    srand(time(NULL));
+    int arra[16]={1,2,3,4,
+                  5,6,7,8,
+                  1,2,3,4,
+                  5,6,7,8},counter1=0;
+
+
+    shuffle(arra);
+
+    int mat1[4][4];
+
+    for(int i=0;i<4;i++){
+        for(int j=0;j<4;j++){
+            mat1[i][j]=arra[counter1];
+            counter1++;
+        }
+    }
+
+    int mat2[4][4]={{0,0,0,0},
+                   {0,0,0,0},
+                   {0,0,0,0},
+                   {0,0,0,0}};
+
+    print(mat2);
+
+    while(isR){
+    cin>>x1>>y1;
+    tmp=mat1[x1-1][y1-1];
+    mat2[x1-1][y1-1]=mat1[x1-1][y1-1];
+
+    print(mat2);
+
+    cin>>x2>>y2;
+    tmp=mat1[x2-1][y2-1];
+    mat2[x2-1][y2-1]=mat1[x2-1][y2-1];
+
+    if(mat1[x1-1][y1-1]!=mat1[x2-1][y2-1]){
+        mat2[x1-1][y1-1]=0;
+        mat2[x2-1][y2-1]=0;
+        counter--;
+            }
+
+        print(mat2);
+
+    counter++;
+
+        if(counter==8){isR=false;}
+
+        }
+
+
+
+    return 0;
+
+}
